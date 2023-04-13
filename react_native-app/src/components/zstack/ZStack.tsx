@@ -6,7 +6,7 @@ interface ZStackPropsType{
     reverse?:boolean
 }
 
-export const VStack=({children}:VStackProps)=>{
+export const ZStack=({children}:ZStackPropsType)=>{
     return(
         <View>
             {children}
