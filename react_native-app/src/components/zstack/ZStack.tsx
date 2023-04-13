@@ -9,8 +9,11 @@ interface ZStackPropsType {
 //create function ---> add every children new
 // property-absolute
 
-const getAbsoluteChuldren = (children: JSX.Element[] | JSX.Element) => {
+const getAbsoluteChuldren = (children: JSX.Element[] | JSX.Element, reverse: boolean) => {
     let childrenArray = React.Children.toArray(children)
+    if (reverse) {
+        childrenArray = childrenArray.reverse()
+    }
     return childrenArray.map((child: any) => {
         return React.cloneElement(
             child, {position: 'absolute'},
@@ -20,10 +23,10 @@ const getAbsoluteChuldren = (children: JSX.Element[] | JSX.Element) => {
 }
 
 
-export const ZStack = ({children}: ZStackPropsType) => {
+export const ZStack = ({children, reverse = false}: ZStackPropsType) => {
     return (
-        <View style={{position:'relative'}}>
-            {getAbsoluteChuldren(children)}
+        <View style={{position: 'relative'}}>
+            {getAbsoluteChuldren(children, reverse)}
         </View>
     )
 }
