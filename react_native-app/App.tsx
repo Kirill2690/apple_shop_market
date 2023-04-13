@@ -1,3 +1,4 @@
+/*
 import {
     FlatList, Image,
     ListRenderItem, Platform, Pressable,
@@ -137,3 +138,13 @@ type ItemType = {
     image: any
 }
 
+*/
+
+
+import {ChildrenComponents} from "./src/components/children/ChildrenComponents";
+
+export default  function App(){
+    return(
+        <ChildrenComponents/>
+    )
+}
