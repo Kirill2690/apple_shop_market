@@ -1,12 +1,19 @@
-import {StyleSheet, View, Text} from "react-native";
+import {StyleSheet, View, Text, ActivityIndicator} from "react-native";
 
 
-export const Footer = () => {
+type FooterPropsType = {
+    isLoading: boolean
+}
+
+
+export const Footer = ({isLoading}: FooterPropsType) => {
     return (
         <View style={styles.footerContent}>
-            <Text style={styles.footerText}>
-                © 2023 It-Incubator.io.All rights reserved
-            </Text>
+            {isLoading ? <ActivityIndicator/> :
+                <Text style={styles.footerText}>
+                    © 2023 It-Incubator.io.All rights reserved
+                </Text>}
+
         </View>
     )
 }

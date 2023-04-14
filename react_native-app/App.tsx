@@ -1,8 +1,8 @@
 import {
     FlatList, Image,
-    ListRenderItem, Platform, Pressable,
+    ListRenderItem, Platform, Pressable, RefreshControl,
     StatusBar,
-    StyleSheet, Text,
+    StyleSheet, Text, TouchableOpacity,
     View
 } from 'react-native';
 
@@ -12,6 +12,7 @@ import {BasketIcon} from "./src/components/svg/BasketIcon";
 import {Header} from './src/components/header/Header'
 import {Footer} from "./src/components/footer/Footer";
 import {Empty} from "./src/components/empty/Empty";
+import {useEffect, useRef, useState} from "react";
 
 
 const images = [
@@ -38,13 +39,20 @@ const prices = [999, 1199, 799, 599, 899, 1199]
 
 
 export default function App() {
-    const fakeData: ItemType[] = [...Array(12)].map((_, index) => ({
+    const [fakeData, setFakeData] = useState<ItemType[]>([...Array(12)].map((_, index) => ({
         id: index + 1,
         title: titles[index % titles.length],
         price: prices[index % prices.length],
         image: images[index % images.length],
 
-    }))
+    })))
+
+    const flatListRef = useRef<FlatList>(null)
+    const [contentVerticalOffset, setContentVerticalOffset] = useState(0)
+    const [isLoading, setIsLoading] = useState(false)
+    const [isRefreshing, setIsRefreshing] = useState(false)
+    const [page, setPage] = useState(1)
+
     const renderItem: ListRenderItem<ItemType> = ({item}) => {
 
         return <View style={styles.itemPhone}>
@@ -61,19 +69,73 @@ export default function App() {
             </View>
         </View>
     }
+    const onEndReached = () => {
+        if (isLoading || page >= 3) return
+        setIsLoading((prev) => !prev)
+        setPage((prev) => prev + 1)
+    }
+    useEffect(() => {
+        const newFakeData = [...Array(6)].map((_, index) => ({
+            id: page * (index + 1) + index + 1,
+            title: titles[index % titles.length],
+            price: prices[index % prices.length],
+            image: images[index % images.length],
+        }))
+        setTimeout(() => {
+            setFakeData((prev) => [...prev, ...newFakeData])
+            setIsLoading(false)
+        }, 3000)
+    }, [page])
+
+    useEffect(() => {
+        if (isRefreshing) {
+            setTimeout(() => {
+                setFakeData([...Array(12)].map((_, index) => ({
+                    id: index + 1,
+                    title: titles[index % titles.length],
+                    price: prices[index % prices.length],
+                    image: images[index % images.length],
+                })))
+                setIsRefreshing(false)
+                setPage(1)
+            }, 3000)
+
+        }
+    }, [isRefreshing])
+
+    const onRefresh = () => {
+        setIsRefreshing(true)
+    }
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content"/>
-            <FlatList data={fakeData} renderItem={renderItem} numColumns={2}
-                      contentContainerStyle={{paddingHorizontal: PADDING,flexGrow:1}}
+            <FlatList onEndReachedThreshold={0.2}
+                      onEndReached={onEndReached} ref={flatListRef} data={fakeData} renderItem={renderItem}
+                      numColumns={2}
+                      contentContainerStyle={{paddingHorizontal: PADDING, flexGrow: 1}}
                       columnWrapperStyle={{justifyContent: 'space-between'}}
                       ListHeaderComponent={Header}
                       ListHeaderComponentStyle={styles.header}
                       stickyHeaderIndices={[0]}
-                      ListFooterComponent={Footer}
+                      ListFooterComponent={() => <Footer isLoading={isLoading}/>}
                       ListFooterComponentStyle={styles.footer}
                       ListEmptyComponent={Empty}
+                      refreshControl={
+                          <RefreshControl
+                              refreshing={isRefreshing}
+                              onRefresh={onRefresh}
+                          />
+
+                      }
+                      onScroll={(event) => {
+                          setContentVerticalOffset(event.nativeEvent.contentOffset.y)
+                      }}
             />
+            {contentVerticalOffset > 400 && <TouchableOpacity style={styles.scrollToTop} onPress={() => {
+                flatListRef.current?.scrollToOffset({animated: true, offset: 0})
+            }}>
+                <Text>TOP</Text>
+            </TouchableOpacity>}
         </View>
     );
 }
@@ -126,7 +188,18 @@ const styles = StyleSheet.create({
     footer: {
         marginHorizontal: -PADDING,
         backgroundColor: '#21201E'
-    }
+    },
+    scrollToTop: {
+        position: 'absolute',
+        right: 30,
+        bottom: 30,
+        width: 50,
+        height: 50,
+        borderRadius: 50 / 2,
+        backgroundColor: '#a85454',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
 
 

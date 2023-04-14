@@ -1,16 +1,13 @@
-import * as React from 'react';
-import { Checkbox } from 'react-native-paper';
+import React from 'react';
+import {Checkbox, HStack} from "native-base";
+
+
 
 export const CheckBoxComponent = () => {
-    const [checked, setChecked] = React.useState(false);
-
-    return (
-        <Checkbox
-            status={checked ? 'checked' : 'unchecked'}
-            onPress={() => {
-                setChecked(!checked);
-            }}
-        />
-    );
+    return <HStack space={6}>
+        <Checkbox value="test" accessibilityLabel="This is a dummy checkbox" />
+        <Checkbox value="test" accessibilityLabel="This is a dummy checkbox" defaultIsChecked />
+    </HStack>;
 };
+
 
