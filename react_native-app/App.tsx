@@ -1,3 +1,4 @@
+/*
 import {
     FlatList, Image,
     ListRenderItem, Platform, Pressable, RefreshControl,
@@ -14,6 +15,8 @@ import {Footer} from "./src/components/footer/Footer";
 import {Empty} from "./src/components/empty/Empty";
 import {useEffect, useRef, useState} from "react";
 
+
+const img_scroll=require('./assets/up-arrow_icon-icons.com_62213.png')
 
 const images = [
     require('./assets/image1.png'),
@@ -131,10 +134,10 @@ export default function App() {
                           setContentVerticalOffset(event.nativeEvent.contentOffset.y)
                       }}
             />
-            {contentVerticalOffset > 400 && <TouchableOpacity style={styles.scrollToTop} onPress={() => {
+            {contentVerticalOffset > 400 && <TouchableOpacity style={styles.scrollToTop}  onPress={() => {
                 flatListRef.current?.scrollToOffset({animated: true, offset: 0})
             }}>
-                <Text>TOP</Text>
+                <Image source={img_scroll} style={styles.scrollImg}/>
             </TouchableOpacity>}
         </View>
     );
@@ -196,10 +199,14 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 50 / 2,
-        backgroundColor: '#a85454',
+        backgroundColor: '#000000',
         justifyContent: 'center',
         alignItems: 'center',
     },
+    scrollImg:{
+        width: 50,
+        height: 50,
+    }
 });
 
 
@@ -208,6 +215,24 @@ type ItemType = {
     title: string,
     price: number,
     image: any
+}
+
+
+*/
+
+import {NavigationContainer} from "@react-navigation/native";
+import {StatusBar} from "expo-status-bar";
+import {Main} from "./src/components/main/Main";
+
+
+
+export default function App() {
+    return (
+        <NavigationContainer>
+            <StatusBar style={'light'}/>
+            <Main/>
+        </NavigationContainer>
+    )
 }
 
 
