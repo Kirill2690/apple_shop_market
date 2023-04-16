@@ -13,7 +13,7 @@ export const DetailsScreen = ({}: DetailsScreenPropsType) => {
         <View>
             <Text>DetailsScreen</Text>
             <Button title={"Jump to Home screen"} onPress={() => {
-            navigation.navigate('Home')}}/>
+            navigation.navigate('Settings',{name:'Kirrll',myAge:33,isDoneCourse:false})}}/>
         </View>
     )
 };

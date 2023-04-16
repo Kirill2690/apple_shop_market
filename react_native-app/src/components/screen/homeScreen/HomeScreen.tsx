@@ -7,8 +7,9 @@ interface HomeScreenPropsTypes {
 
 }
 
-export const HomeScreen = ({}: HomeScreenPropsTypes) => {
+export const HomeScreen = (props: HomeScreenPropsTypes) => {
     const navigation = useAppNavigation()
+    console.log("HomeScreen props",JSON.stringify(props,null,2))
     return (
         <View>
             <Text>HomeScreen</Text>

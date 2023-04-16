@@ -4,19 +4,21 @@ import {HomeScreen} from "../screen/homeScreen/HomeScreen";
 import {MainStackType} from "../screen/types";
 import {DetailsScreen} from "../screen/details/DetailsScreen";
 import {SettingsScreen} from "../screen/settings/SettingsScreen";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 
-const Stack = createNativeStackNavigator<MainStackType>()
+/*const Stack = createNativeStackNavigator<MainStackType>()*/
+const Tab = createBottomTabNavigator<MainStackType>()
 
 export const Main = () => {
     return (
         <View style={styles.container}>
-            <Stack.Navigator>
-                <Stack.Screen name={'Home'} component={HomeScreen}/>
-                <Stack.Screen name={'Details'} component={DetailsScreen}/>
-                <Stack.Screen name={'Settings'}>{(props) =>
+            <Tab.Navigator>
+                <Tab.Screen name={'Home'} component={HomeScreen}/>
+                <Tab.Screen name={'Details'} component={DetailsScreen}/>
+                <Tab.Screen name={'Settings'}>{(props) =>
                     <SettingsScreen {...props} age={33}/>
-                }</Stack.Screen>
-            </Stack.Navigator>
+                }</Tab.Screen>
+            </Tab.Navigator>
         </View>
     )
 }
@@ -24,8 +26,7 @@ export const Main = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center"
+
 
     }
 })
