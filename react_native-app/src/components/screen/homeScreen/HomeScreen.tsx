@@ -2,6 +2,8 @@ import React from 'react';
 import {View, Text, Button} from 'react-native';
 import {StyleSheet} from 'react-native';
 import {useAppNavigation} from "../../../hooks/useAppNavigation";
+import {BasketIcon} from "../../svg/BasketIcon";
+import {createDrawerNavigator} from "@react-navigation/drawer";
 
 interface HomeScreenPropsTypes {
 
@@ -9,7 +11,7 @@ interface HomeScreenPropsTypes {
 
 export const HomeScreen = (props: HomeScreenPropsTypes) => {
     const navigation = useAppNavigation()
-    console.log("HomeScreen props",JSON.stringify(props,null,2))
+    console.log("HomeScreen props", JSON.stringify(props, null, 2))
     return (
         <View>
             <Text>HomeScreen</Text>

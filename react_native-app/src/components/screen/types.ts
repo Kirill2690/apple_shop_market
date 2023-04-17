@@ -4,7 +4,7 @@ export type MainStackType = {
     Home: undefined,
     Details: undefined,
     Settings:{
-        name:string,
+        name:string|undefined,
         myAge:number,
         isDoneCourse:boolean
     }

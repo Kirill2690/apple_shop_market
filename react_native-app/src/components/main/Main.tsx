@@ -6,9 +6,12 @@ import {DetailsScreen} from "../screen/details/DetailsScreen";
 import {SettingsScreen} from "../screen/settings/SettingsScreen";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import {createDrawerNavigator} from "@react-navigation/drawer";
+import {BasketIcon} from "../svg/BasketIcon";
 
 /*const Stack = createNativeStackNavigator<MainStackType>()*/
 const Tab = createBottomTabNavigator<MainStackType>()
+
 
 export const Main = () => {
     return (
@@ -16,7 +19,7 @@ export const Main = () => {
             <Tab.Navigator
                 screenOptions={({route}) => ({
                     tabBarIcon: ({focused, color, size}) => {
-                        let iconName;
+                        let iconName
                         if (route.name === 'Home') {
                             iconName = focused
                                 ? 'ios-home'
@@ -40,6 +43,7 @@ export const Main = () => {
                     <SettingsScreen {...props} age={33}/>
                 }</Tab.Screen>
             </Tab.Navigator>
+
         </View>
     )
 }
