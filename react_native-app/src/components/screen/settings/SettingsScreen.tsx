@@ -1,27 +1,29 @@
 import React from 'react';
-import { View,Text } from 'react-native';
-import { StyleSheet } from 'react-native';
+import {View, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {StackSettingsProps} from "../types";
 
-interface SettingsScreenPropsType extends StackSettingsProps{
-    age:number
+interface SettingsScreenPropsType extends StackSettingsProps {
+    age: number
 }
 
-export const SettingsScreen= ({age,route,navigation}:SettingsScreenPropsType) => {
-    const {name,myAge,isDoneCourse}=route.params
-  return (
-    <View>
-      <Text>SettingsScreen</Text>
-        <Text>age:{age}</Text>
-        <Text>name:{name}</Text>
-        <Text>myAge:{myAge}</Text>
-        <Text>{isDoneCourse?'isDoneCourse':'OOOPS...not isDoneCourse'}</Text>
-    </View>
-  )
+export const SettingsScreen = ({age, route, navigation}: SettingsScreenPropsType) => {
+    const params = route.params
+    return (
+        <View>
+            <Text>SettingsScreen</Text>
+            {params && (
+                <>
+                    <Text>name:{params.name}</Text>
+                    <Text>myAge:{params.myAge}</Text>
+                    <Text>{params.isDoneCourse ? 'isDoneCourse' : 'OOOPS...not isDoneCourse'}</Text>
+                </>
+            )
+            }
+            <Text>age:{age}</Text>
+        </View>
+    )
 };
 
 
-
-const styles = StyleSheet.create({
-    
-});
+const styles = StyleSheet.create({});
