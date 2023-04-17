@@ -1,4 +1,3 @@
-/*
 import {
     FlatList, Image,
     ListRenderItem, Platform, Pressable, RefreshControl,
@@ -14,31 +13,7 @@ import {Header} from './src/components/header/Header'
 import {Footer} from "./src/components/footer/Footer";
 import {Empty} from "./src/components/empty/Empty";
 import {useEffect, useRef, useState} from "react";
-
-
-const img_scroll=require('./assets/up-arrow_icon-icons.com_62213.png')
-
-const images = [
-    require('./assets/image1.png'),
-    require('./assets/image2.png'),
-    require('./assets/image3.png'),
-    require('./assets/image4.png'),
-    require('./assets/image5.png'),
-    require('./assets/image6.png'),
-]
-
-
-const titles = [
-    'Apple Iphone 13 128GB Blue',
-    'Apple Iphone 14 Pro 128GB Space Black',
-    'Apple Iphone 12 128GB Purple',
-    'Apple Iphone SE 128Gb 2022 Midnight',
-    'Apple Iphone 13 512GB Midnight',
-    'Apple Iphone 14 Pro Max 256GB Purple',
-
-]
-
-const prices = [999, 1199, 799, 599, 899, 1199]
+import {description, images, img_scroll, prices, titles} from "./src/data/data";
 
 
 export default function App() {
@@ -47,6 +22,7 @@ export default function App() {
         title: titles[index % titles.length],
         price: prices[index % prices.length],
         image: images[index % images.length],
+        description: description[index % description.length]
 
     })))
 
@@ -134,7 +110,7 @@ export default function App() {
                           setContentVerticalOffset(event.nativeEvent.contentOffset.y)
                       }}
             />
-            {contentVerticalOffset > 400 && <TouchableOpacity style={styles.scrollToTop}  onPress={() => {
+            {contentVerticalOffset > 400 && <TouchableOpacity style={styles.scrollToTop} onPress={() => {
                 flatListRef.current?.scrollToOffset({animated: true, offset: 0})
             }}>
                 <Image source={img_scroll} style={styles.scrollImg}/>
@@ -203,7 +179,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    scrollImg:{
+    scrollImg: {
         width: 50,
         height: 50,
     }
@@ -218,8 +194,7 @@ type ItemType = {
 }
 
 
-*/
-
+/*
 import {NavigationContainer} from "@react-navigation/native";
 import {StatusBar} from "expo-status-bar";
 import {Main} from "./src/components/main/Main";
@@ -235,4 +210,5 @@ export default function App() {
     )
 }
 
+*/
 

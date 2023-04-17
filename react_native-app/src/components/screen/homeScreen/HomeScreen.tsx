@@ -18,6 +18,10 @@ export const HomeScreen = (props: HomeScreenPropsTypes) => {
             <Button title={"Jump to Details screen"} onPress={() => {
                 navigation.navigate('Details')
             }}/>
+            <Button
+                onPress={() => navigation.navigate('MyModal')}
+                title="Open Modal"
+            />
         </View>
     )
 };

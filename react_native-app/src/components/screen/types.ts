@@ -8,6 +8,7 @@ export type MainStackType = {
         myAge:number,
         isDoneCourse:boolean
     }
+    MyModal:undefined
 }
 
 

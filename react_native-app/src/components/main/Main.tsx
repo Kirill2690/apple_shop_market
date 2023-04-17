@@ -8,9 +8,13 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import {createDrawerNavigator} from "@react-navigation/drawer";
 import {BasketIcon} from "../svg/BasketIcon";
+import createStackNavigator from "react-native-screens/createNativeStackNavigator";
+import {MyModal} from "../screen/modal/MyModal";
 
 /*const Stack = createNativeStackNavigator<MainStackType>()*/
 const Tab = createBottomTabNavigator<MainStackType>()
+
+
 
 
 export const Main = () => {
@@ -43,7 +47,6 @@ export const Main = () => {
                     <SettingsScreen {...props} age={33}/>
                 }</Tab.Screen>
             </Tab.Navigator>
-
         </View>
     )
 }
