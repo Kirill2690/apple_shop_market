@@ -17,9 +17,10 @@ import {Header} from "../header/Header";
 import {Footer} from "../footer/Footer";
 import {Empty} from "../empty/Empty";
 import {styles} from "./styles";
+import {Raiting} from "../raiting/Raiting";
 
 
-export const FlatListComponens=()=>{
+export const FlatListComponent=()=>{
     const [fakeData, setFakeData] = useState<ItemType[]>([...Array(8)].map((_, index) => ({
         id: index + 1,
         title: titles[index % titles.length],
@@ -42,13 +43,13 @@ export const FlatListComponens=()=>{
             <Image style={styles.phoneImage} source={item.image} resizeMode={'contain'}/>
             <View style={styles.infoPhone}>
                 <Text style={styles.phoneName}>{item.title}</Text>
+                <Raiting value={raiting.length}/>
                 <View style={styles.containerPhonePrice}>
                     <Text>$ {item.price}</Text>
                     <Pressable>
                         <BasketIcon/>
                     </Pressable>
                 </View>
-
             </View>
         </View>
     }

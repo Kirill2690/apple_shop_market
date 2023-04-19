@@ -8,7 +8,8 @@ export type MainStackType = {
         myAge:number,
         isDoneCourse:boolean
     }
-    MyModal:undefined
+    MyModal:undefined,
+    Product:undefined
 }
 
 
